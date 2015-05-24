@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MORTALITY AND ECONOMIC LOSSES FROM WEATHER, CLIMATE AND WATER EXTREMES IN THE TWENTIETH CENTURY</title>
+  <meta charset="utf-8">
+  <meta name="description" content="MORTALITY AND ECONOMIC LOSSES FROM WEATHER, CLIMATE AND WATER EXTREMES IN THE TWENTIETH CENTURY">
+  <meta name="author" content="K.CHKIFA">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>MORTALITY AND ECONOMIC LOSSES FROM WEATHER, CLIMATE AND WATER EXTREMES IN THE TWENTIETH CENTURY</h1>
+    <h2>MINI ATLAS</h2>
+    <p>K.CHKIFA<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<h2>MINI ATLAS</h2>
+
+<p>Storms, floods and droughts are among the most recurrent weather-, climate- and water-related hazards around the world. However, the distribution of deaths and economic losses from these hazards varies from Region to Region. For example, the main contributors to the loss of life have been droughts in Africa; storms in Asia, in Central America, North America and the Caribbean, and in the South-West Pacific; floods in South America; and heatwaves in Europe. On the other hand, a large portion of economic losses has been attributed to floods in Africa, Asia, South America and Europe, and to storms in Central America, North America and the Caribbean, and the South-West Pacific.    </p>
+
+<p>This <strong>Mini Atlas</strong> allow us to discover the most deadly types of disaster and those that have more impact on the economy of a continent.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Information about the dataset</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The analysis provided in this Atlas is based on the CRED EM-DAT <a href="http://www.emdat.be/database"><em>database</em></a>, which contains data on disasters caused by several types of natural hazards - geophysical, meteorological, climatological, hydrological and biological - and technological disasters dating back to the year 1900. </p>
+
+<p>The objective of developing and maintaining this database is to provide evidence to support humanitarian actions and the development of national and international programmes.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Example of Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">globe_20C_disaster &lt;- read.csv(&quot;natural_disaster_globe_20C.csv&quot;, header = TRUE, sep = &quot;,&quot;)
+#Africa
+africa_20C_disaster&lt;-subset(globe_20C_disaster,continent==&quot;Africa&quot; &amp; year&lt;2000 )
+af&lt;-africa_20C_disaster[,-c(6,7,8)]
+af_agg&lt;-aggregate(af$Total.deaths,by=list(af$disaster.type),FUN = function(x){sum(as.numeric(x))})
+names(af_agg)&lt;-c(&quot;Type of disaster&quot;,&quot;Total of deaths&quot;)
+af_agg&lt;-af_agg[order(af_agg[2],decreasing = TRUE),]
+head(af_agg,5)
+</code></pre>
+
+<pre><code>##   Type of disaster Total of deaths
+## 1          Drought         1692444
+## 3         Epidemic          818920
+## 2       Earthquake           36098
+## 5            Flood           29750
+## 9            Storm            7168
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Example of Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(plotrix)
+pie3D(af_agg[1:5,2],labels=af_agg[1:5,1],explode=0.1,main=&quot;Top 5 total deaths by disaster type&quot;,radius=0.8)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>About this MINI ATLAS</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Well you can see the application here:  </p>
+
+<ul>
+<li><a href="https://chkifa.shinyapps.io/top5disaster/"><em>shiny application</em></a><br></li>
+</ul>
+
+<p>and the code here:  </p>
+
+<ul>
+<li><a href="https://github.com/chkifa/top5disaster"><em>code</em></a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Information about the dataset'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example of Code'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example of Plot'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='About this MINI ATLAS'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
